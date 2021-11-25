@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vida legalkkkkkkkk</title>
+    <style>
+        body {
+            background-color: rgb(85, 82, 82);
+        }
+
+        main {
+            max-width: 40rem;
+            margin: auto;
+        }
+
+        fieldset {
+            background-color: white;
+            margin: 1rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        code {
+            background-color: rgba(85, 82, 82, 0.384);
+            padding: .5rem;
+            border-radius: 1rem;
+            transition: .3s;
+        }
+
+        code:hover {
+            border: 1px solid black;
+            font-weight: bolder;
+            padding: 1rem 4rem;
+            margin: 5rem;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        button {
+            margin-bottom: 1rem;
+            padding: .5rem;
+            border: none;
+            border-radius: .5rem;
+            cursor: pointer;
+            border: 1px solid black;
+            transition: .1s;
+        }        
+
+        button:hover {
+            border: 2px solid black;
+            padding: 1.1rem 1.5rem;
+            margin: -.1rem;
+        }
+
+        .res {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <fieldset>
+            <section class="pa">
+                <div class="pa-wrapper"> <a href=""></a>
+                    <fieldset>
+                        <legend><h2>Fórmula do Termo Geral da PA: </h2></legend>
+                        <div class="termo-geral-pa">
+                            <code>
+                                an = a1 + (n-1) * r
+                            </code>
+                            <p>Onde: <br><br>
+                            an = Enésimo termo/último termo <br>
+                            a1 = Primeiro termo <br>
+                            n = Número de termos <br>
+                            r = Razão</p>
+                            <button onclick="calcularpa()">calcular</button>
+                            <div class="res" id="respa">
+                                aguardando a entradada de dados...
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend><h2>Fórmula da Soma dos Termos de uma PA:</h2></legend>
+                        <div class="soma-dos-termos-pa">
+                            <code>
+                                Sn = ((a1 + an) * n) / 2
+                            </code>
+                            <p>Onde: <br><br>
+                            a1 = Primeiro termo <br>
+                            an = Enésimo termo/último termo <br>
+                            n = Número de termos</p>
+                        </div>
+                        <button onclick="calcularsomapa()">calcular</button>
+                        <div class="res" id="ressomapa">
+                            aguardando a entrada de dados...
+                        </div>
+                    </fieldset>
+                </div>
+            </section>
+        </fieldset>
+        <fieldset>
+            <section class="pg">
+                <div class="pg-wrapper">
+                    <fieldset>
+                        <legend><h2>Fórmula do Termo Geral de uma PG:</h2></legend>
+                        <div class="termo-geral-pg">
+                            <code>
+                                an = a1 * a^n-1
+                            </code>
+                            <p>Onde: <br><br>
+                            an = Enésimo termo/último termo <br>
+                            a1 = Primero termo <br>
+                            q = Razão <br>
+                            n = Quantidade de termos <br>
+                            </p>
+                        </div>
+                        <button onclick="calcularpg()">calcular</button>
+                        <div class="res" id="respg">
+                            aguardando a entrada de dados...
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend><h2>Fórmula da soma do <strong>n</strong> termos de uma PG</h2></legend>
+                        <div class="soma-dos-termos-pg">
+                            <code>
+                                Sn = (a1 * (q^n - 1)) / q - 1
+                            </code>
+                            <p>Onde: <br><br>
+                            a1 = Primeiro termo <br>
+                            q = Razão <br>
+                            n = Quantidade de termos</p>
+                        </div>
+                        <button onclick="calcularsomapg()">calcular</button>
+                        <div class="res" id="somapg">
+                            aguardando a entrada de dados...
+                        </div>
+                    </fieldset>
+                </div>
+            </section>
+        </fieldset>
+    </main>
+    <script>
+        //Termo geral da PA
+        function calcularpa(){
+            let an = 0;
+            let a1 = parseInt(prompt("valor do primeiro termo?"));
+            let n = parseInt(prompt("quantidade de termos?"));
+            let r = parseInt(prompt("quanto vale a razão?"));
+            let respa = document.getElementById("respa");
+            
+            an = a1 + (n - 1) * r;
+
+            respa.innerHTML = `an = ${a1} + (${n} - 1) * ${r}<br>
+            an = ${a1} + ${n - 1} * ${r}<br>
+            an = ${a1} + ${(n-1)*r}<br>
+            an = ${a1 + (n - 1) * r}<br> O valor de an é: ${an}`;
+        }
+
+        //Soma dos termos da PA
+        function calcularsomapa(){
+            let sn = 0;
+            let a1s = parseInt(prompt("valor do 1° termo?"));
+            let ans = parseInt(prompt("enésimo termo?"));
+            let ns = parseInt(prompt("número de termos?"));
+            let ressomapa = document.getElementById("ressomapa");
+
+            sn = ((a1s+ans)*ns)/2
+
+            ressomapa.innerHTML = `Sn = ((${a1s} + ${ans}) * ${ns}) / 2<br>
+            Sn = (${a1s+ans} * ${ns}) / ${2}<br>
+            Sn = (${(a1s+ans)*ns}) / ${2}<br>
+            Sn = ${((a1s+ans)*ns)/2}<br>
+            O valor de Sn é: ${sn}`;
+        }
+
+        //Termo geral da PG
+        function calcularpg(){
+            let anp = 0;
+            let a1p = parseInt(prompt("valor do 1° termo?"));
+            let q = parseInt(prompt("quanto vale a razão?"));
+            let np = parseInt(prompt("número de termos?"));
+            let respg = document.getElementById("respg");
+
+            anp = a1p * Math.pow(q, np-1);
+            
+            respg.innerHTML = `an = ${a1p} * ${q}^${np}-1<br>
+            an = ${a1p} * ${q}^${np-1}<br>
+            an = ${a1p} * ${Math.pow(q, np-1)}<br>
+            an = ${a1p * Math.pow(q, np-1)}<br>
+            O valor de an é: ${anp}`;
+        }
+
+        //Soma dos termos da PG
+        function calcularsomapg(){
+            let snp = 0;
+            let a1ps = parseInt(prompt("valor do 1° termo?"));
+            let qs = parseInt(prompt("quanto vale a razão?"));
+            let ns = parseInt(prompt("quantidade de termos:"));
+            let somapg = document.getElementById("somapg");
+
+            snp = (a1ps*(Math.pow(qs, ns)-1))/(qs-1);
+
+            somapg.innerHTML = `Sn = (${a1ps} * (${qs}^${ns} - 1)) / ${qs} - 1<br>
+            Sn = (${a1ps} * (${Math.pow(qs, ns)} - 1)) / ${qs-1}<br>
+            Sn = (${a1ps} * ${Math.pow(qs, ns)-1}) / ${qs-1}<br>
+            Sn = (${a1ps*(Math.pow(qs, ns)-1)}) / ${qs-1}<br>
+            Sn = ${(a1ps*(Math.pow(qs, ns)-1))/(qs-1)}<br>
+            O valor de Sn é: ${snp}`;
+        }
+    </script>
+</body>
+</html>
