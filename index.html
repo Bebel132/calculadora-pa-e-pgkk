@@ -57,7 +57,9 @@
         }
 
         .res {
-            margin-top: 1rem;
+            margin: 1rem auto;
+            text-align: left;
+            width: 15rem;
         }
     </style>
 </head>
@@ -77,6 +79,7 @@
                             a1 = Primeiro termo <br>
                             n = Número de termos <br>
                             r = Razão</p>
+                            <p><strong>VALOR NEUTRO = 0</strong>, quando quiser descobrir an, por exemplo, preencha com 0, isso também vale para a quantidade de termos e a razão</p>
                             <button onclick="calcularpa()">calcular</button>
                             <div class="res" id="respa">
                                 aguardando a entradada de dados...
@@ -109,7 +112,7 @@
                         <legend><h2>Fórmula do Termo Geral de uma PG:</h2></legend>
                         <div class="termo-geral-pg">
                             <code>
-                                an = a1 * a^n-1
+                                an = a1 * q^n-1
                             </code>
                             <p>Onde: <br><br>
                             an = Enésimo termo/último termo <br>
@@ -144,72 +147,96 @@
         </fieldset>
     </main>
     <script>
+        let an, a1, n, r, sn = 0;
         //Termo geral da PA
         function calcularpa(){
-            let an = 0;
-            let a1 = parseInt(prompt("valor do primeiro termo?"));
-            let n = parseInt(prompt("quantidade de termos?"));
-            let r = parseInt(prompt("quanto vale a razão?"));
+            an = parseFloat(prompt("valor do enésimo termo?"));
+            a1 = parseFloat(prompt("valor do primeiro termo?"));
+            n = parseFloat(prompt("quantidade de termos?"));
+            r = parseFloat(prompt("quanto vale a razão?"));
             let respa = document.getElementById("respa");
-            
-            an = a1 + (n - 1) * r;
 
-            respa.innerHTML = `an = ${a1} + (${n} - 1) * ${r}<br>
-            an = ${a1} + ${n - 1} * ${r}<br>
-            an = ${a1} + ${(n-1)*r}<br>
-            an = ${a1 + (n - 1) * r}<br> O valor de an é: ${an}`;
+            if(a1==0 && an!=0 && r!=0 && n!=0){
+                respa.innerHTML = `${an} = a1 + (${n} - 1) * ${r}<br>
+                ${an} = a1 + ${n-1} * ${r}<br>
+                ${an} = a1 + ${(n-1)*r}<br>
+                ${an-(n-1)*r} = a1<br>
+                O valor do primeiro termo é: ${an-(n-1)*r}`
+            }else if(a1!=0 && an==0 && r>0 && n>0){
+                respa.innerHTML = `an = ${a1} + (${n} - 1) * ${r}<br>
+                an = ${a1} + ${n - 1} * ${r}<br>
+                an = ${a1} + ${(n-1)*r}<br>
+                an = ${a1 + (n - 1) * r}<br>
+                O valor do enésimo termo é: ${a1 + (n - 1) * r}`;
+            }else if(an>0 && r==0 && n>0){
+                respa.innerHTML = `${an} = ${a1} + (${n} - 1) * r<br>
+                ${an} = ${a1} + ${n - 1} * r<br>
+                ${an} = ${a1} + ${(n-1)} * r<br>
+                ${an} = ${a1 + (n - 1)} * r<br>
+                ${an} / ${a1+(n-1)} = r<br>
+                ${an/(a1+(n-1))} = r<br>
+                O valor da razão é: ${an/(a1+(n-1))}`;
+            }else if(an>0 && r>0 && n==0){
+                respa.innerHTML = `${an} = ${a1} + (n - 1) * ${r}<br>
+                ${an} = ${a1} + (n*${r} - 1*${r})<br>
+                ${an} = ${a1} + ${r}n - ${1*r}<br>
+                ${an} = ${a1 - 1*r} + ${r}n<br>
+                ${an} + ${a1-1*r} = ${r}n<br>
+                ${an-(a1-1*r)} = ${r}n<br>
+                ${an-(a1-1*r)} / ${r} = n<br>
+                ${(an-(a1-1*r))/r} = n<br>
+                A quantidade de termos é: ${(an-(a1-1*r))/r}`;
+            }
         }
 
         //Soma dos termos da PA
         function calcularsomapa(){
-            let sn = 0;
-            let a1s = parseInt(prompt("valor do 1° termo?"));
-            let ans = parseInt(prompt("enésimo termo?"));
-            let ns = parseInt(prompt("número de termos?"));
+            a1 = parseFloat(prompt("valor do 1° termo?"));
+            an = parseFloat(prompt("enésimo termo?"));
+            n = parseFloat(prompt("número de termos?"));
             let ressomapa = document.getElementById("ressomapa");
 
-            sn = ((a1s+ans)*ns)/2
+            sn = ((a1+an)*n)/2
 
-            ressomapa.innerHTML = `Sn = ((${a1s} + ${ans}) * ${ns}) / 2<br>
-            Sn = (${a1s+ans} * ${ns}) / ${2}<br>
-            Sn = (${(a1s+ans)*ns}) / ${2}<br>
-            Sn = ${((a1s+ans)*ns)/2}<br>
-            O valor de Sn é: ${sn}`;
+            ressomapa.innerHTML = `Sn = ((${a1} + ${an}) * ${n}) / 2<br>
+            Sn = (${a1+an} * ${n}) / ${2}<br>
+            Sn = (${(a1+an)*n}) / ${2}<br>
+            Sn = ${((a1+an)*n)/2}<br>
+            O valor da soma dos termos é: ${sn}`;
         }
 
         //Termo geral da PG
         function calcularpg(){
-            let anp = 0;
-            let a1p = parseInt(prompt("valor do 1° termo?"));
-            let q = parseInt(prompt("quanto vale a razão?"));
-            let np = parseInt(prompt("número de termos?"));
+            a1 = parseFloat(prompt("valor do 1° termo?"));
+            r = parseFloat(prompt("quanto vale a razão?"));
+            n = parseFloat(prompt("número de termos?"));
             let respg = document.getElementById("respg");
 
-            anp = a1p * Math.pow(q, np-1);
+            an = a1 * Math.pow(r, n-1);
             
-            respg.innerHTML = `an = ${a1p} * ${q}^${np}-1<br>
-            an = ${a1p} * ${q}^${np-1}<br>
-            an = ${a1p} * ${Math.pow(q, np-1)}<br>
-            an = ${a1p * Math.pow(q, np-1)}<br>
-            O valor de an é: ${anp}`;
+            respg.innerHTML = `an = ${a1} * ${r}^${n}-1<br>
+            an = ${a1} * ${r}^${n-1}<br>
+            an = ${a1} * ${Math.pow(r, n-1)}<br>
+            an = ${a1 * Math.pow(r, n-1)}<br>
+            O valor de an é: ${an}`;
         }
 
         //Soma dos termos da PG
         function calcularsomapg(){
-            let snp = 0;
-            let a1ps = parseInt(prompt("valor do 1° termo?"));
-            let qs = parseInt(prompt("quanto vale a razão?"));
-            let ns = parseInt(prompt("quantidade de termos:"));
+            sn = 0;
+            a1 = parseFloat(prompt("valor do 1° termo?"));
+            r = parseFloat(prompt("quanto vale a razão?"));
+            n = parseFloat(prompt("quantidade de termos:"));
             let somapg = document.getElementById("somapg");
 
-            snp = (a1ps*(Math.pow(qs, ns)-1))/(qs-1);
+            sn = (a1*(Math.pow(r, n)-1))/(r-1);
 
-            somapg.innerHTML = `Sn = (${a1ps} * (${qs}^${ns} - 1)) / ${qs} - 1<br>
-            Sn = (${a1ps} * (${Math.pow(qs, ns)} - 1)) / ${qs-1}<br>
-            Sn = (${a1ps} * ${Math.pow(qs, ns)-1}) / ${qs-1}<br>
-            Sn = (${a1ps*(Math.pow(qs, ns)-1)}) / ${qs-1}<br>
-            Sn = ${(a1ps*(Math.pow(qs, ns)-1))/(qs-1)}<br>
-            O valor de Sn é: ${snp}`;
+            somapg.innerHTML = `Sn = (${a1} * (${r}^${n} - 1)) / ${r} - 1<br>
+            Sn = (${a1} * (${Math.pow(r, n)} - 1)) / ${r-1}<br>
+            Sn = (${a1} * ${Math.pow(r, n)-1}) / ${r-1}<br>
+            Sn = (${a1*(Math.pow(r, n)-1)}) / ${r-1}<br>
+            Sn = ${(a1*(Math.pow(r, n)-1))/(r-1)}<br>
+            O valor da soma dos termos é: ${sn}`;
         }
     </script>
 </body>
